@@ -1,0 +1,23 @@
+{
+  "name": "CartItem",
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string",
+      "description": "ID of the product"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "description": "Quantity in cart"
+    },
+    "user_session": {
+      "type": "string",
+      "description": "User session ID for cart persistence"
+    }
+  },
+  "required": [
+    "product_id",
+    "user_session"
+  ]
+}
