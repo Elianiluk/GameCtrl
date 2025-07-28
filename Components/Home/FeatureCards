@@ -1,0 +1,52 @@
+import React from "react";
+import { Shield, Zap, Truck, Gamepad2 } from "lucide-react";
+import { motion } from "framer-motion";
+
+const features = [
+  {
+    icon: Shield,
+    title: "Premium Quality",
+    description: "Only authentic controllers with manufacturer warranty",
+    color: "from-blue-500 to-cyan-500"
+  },
+  {
+    icon: Zap,
+    title: "Lightning Fast",
+    description: "Zero input lag with advanced wireless technology",
+    color: "from-purple-500 to-pink-500"
+  },
+  {
+    icon: Truck,
+    title: "Free Shipping",
+    description: "Fast & free delivery on orders over $50",
+    color: "from-green-500 to-emerald-500"
+  },
+  {
+    icon: Gamepad2,
+    title: "Pro Gaming",
+    description: "Controllers used by esports professionals",
+    color: "from-orange-500 to-red-500"
+  }
+];
+
+export default function FeatureCards() {
+  return (
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {features.map((feature, index) => (
+        <motion.div
+          key={feature.title}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: index * 0.1 }}
+          className="glass-effect rounded-2xl p-8 text-center hover:scale-105 transition-all duration-300 group"
+        >
+          <div className={`w-16 h-16 mx-auto mb-6 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+            <feature.icon className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+          <p className="text-slate-400 leading-relaxed">{feature.description}</p>
+        </motion.div>
+      ))}
+    </section>
+  );
+}
