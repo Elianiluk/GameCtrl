@@ -1,0 +1,94 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Product name"
+    },
+    "brand": {
+      "type": "string",
+      "enum": [
+        "Xbox",
+        "PlayStation",
+        "Nintendo",
+        "Razer",
+        "Logitech",
+        "SteelSeries",
+        "8BitDo",
+        "PowerA",
+        "Other"
+      ],
+      "description": "Controller brand"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Wireless",
+        "Wired",
+        "Pro",
+        "Elite",
+        "Racing",
+        "Arcade",
+        "Retro"
+      ],
+      "description": "Controller category"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price in USD"
+    },
+    "original_price": {
+      "type": "number",
+      "description": "Original price for showing discounts"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Product image URL"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Key product features"
+    },
+    "compatibility": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Compatible platforms"
+    },
+    "in_stock": {
+      "type": "boolean",
+      "default": true,
+      "description": "Availability status"
+    },
+    "stock_count": {
+      "type": "number",
+      "description": "Number in stock"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Featured on homepage"
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "description": "Average rating"
+    }
+  },
+  "required": [
+    "name",
+    "brand",
+    "price",
+    "description"
+  ]
+}
