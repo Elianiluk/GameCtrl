@@ -1,0 +1,65 @@
+import React, { useState, useEffect } from "react";
+import { Product } from "@/entities/Product";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Star, ShoppingCart, ArrowRight, Gamepad2, Zap, Shield, Truck } from "lucide-react";
+import { motion } from "framer-motion";
+
+import FeaturedProducts from "../components/home/FeaturedProducts";
+import BrandShowcase from "../components/home/BrandShowcase";
+import HeroSection from "../components/home/HeroSection";
+import FeatureCards from "../components/home/FeatureCards";
+
+export default function Home() {
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadFeaturedProducts();
+  }, []);
+
+  const loadFeaturedProducts = async () => {
+    try {
+      const products = await Product.filter({ is_featured: true }, '-created_date', 6);
+      setFeaturedProducts(products);
+    } catch (error) {
+      console.error("Error loading featured products:", error);
+    }
+    setIsLoading(false);
+  };
+
+  return (
+    <div className="min-h-screen text-white">
+      <HeroSection />
+      
+      <div className="max-w-7xl mx-auto px-6 py-16 space-y-24">
+        <FeatureCards />
+        <BrandShowcase />
+        <FeaturedProducts products={featuredProducts} isLoading={isLoading} />
+        
+        {/* CTA Section */}
+        <motion.section 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="glass-effect rounded-2xl p-12 text-center glow-effect"
+        >
+          <h2 className="text-4xl font-bold mb-6 text-gradient">
+            Ready to Level Up Your Gaming?
+          </h2>
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+            Browse our complete collection of premium gaming controllers and find your perfect match.
+          </p>
+          <Link to={createPageUrl("Products")}>
+            <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 text-lg glow-effect">
+              Shop All Controllers
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </Link>
+        </motion.section>
+      </div>
+    </div>
+  );
+}
